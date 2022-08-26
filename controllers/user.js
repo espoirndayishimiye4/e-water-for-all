@@ -4,7 +4,7 @@ const ErrorResponse = require("../utils/errorResponses");
 const User = require("../models/user");
 
 const getAllUser = asyncHandler(async (req, res, next) => {
-  const user = await User.find().populate("posts");
+  const user = await User.find();
   res.status(200).json({
     success: true,
     data: user,
@@ -19,7 +19,11 @@ const createUser = asyncHandler(async (req, res, next) => {
     password,
     address,
   });
-  sendTokenResponse(user, 200, req, res);
+  //sendTokenResponse(user, 200, req, res);
+  res.status(201).json({
+    success: true,
+    data: user
+  })
 });
 
 const getOneUser = asyncHandler(async (req, res, next) => {

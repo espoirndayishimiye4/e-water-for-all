@@ -14,13 +14,13 @@ const routes = express.Router();
 
 routes
   .route("/:_id")
-  .get(protected, authorize("admin"), getOneUser)
-  .delete(protected, authorize("admin"), deleteOneUser)
-  .patch(protected, authorize("admin"), updateUser);
+  .get(getOneUser)
+  .delete(deleteOneUser)
+  .patch(updateUser);
 routes
   .route("/")
-  .get(protected, authorize("admin"), getAllUser)
-  .post(protected, authorize("admin"), createUser);
+  .get( getAllUser)
+  .post( createUser);
 
 routes.route("/login").post(login);
 routes.route("/user/logout").get(logout);
