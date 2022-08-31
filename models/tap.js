@@ -1,4 +1,5 @@
 const {Schema, default: mongoose} = require('mongoose')
+//mongoose.Promise = global.Promise;
 
 const tapSchema = new Schema({
     agentId: {
@@ -21,6 +22,5 @@ const tapSchema = new Schema({
     }
 })
 
-const tap = mongoose.model('tap', tapSchema)
-
-module.exports = tap
+const tap = mongoose.model('Tap', tapSchema)
+module.exports = tap;

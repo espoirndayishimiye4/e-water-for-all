@@ -12,6 +12,7 @@ app.use(cookieParser())
 
 dbConnect();
 
+
 app.use('/user', require('./routes/user'));
 app.use('/message', require('./routes/message'));
 app.use('/report', require('./routes/report'));
@@ -21,3 +22,4 @@ mongoose.connection.once('open', () => {
 		console.log(`server is running on port ${process.env.PORT}`);
 	});
 });
+
