@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 
 app.use('/user', require('./routes/user'));
 app.use('/message', require('./routes/message'));
-
+app.use('/report', require('./routes/report'));
 mongoose.connection.once('open', () => {
 	console.log('DB connected');
 	app.listen(process.env.PORT || 3500, () => {
