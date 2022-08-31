@@ -1,23 +1,58 @@
-const {Schema, default: mongoose} = require('mongoose')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const { Schema, default: mongoose } = require("mongoose");
 
-const tapSchema = new Schema({
-    firstName: {
-        type:String
-    },
-    lastName:{
-        type:String
-    },
-    email: {
-        type: String,
-    },
-    password: {
-        type: String,
-    },
-    address: {
-        type:String
-    }
-})
+const userSchema = new Schema({
+  firstName: {
+    type: String,
+    required: [true, "please provide first name"],
+  },
+  lastName: {
+    type: String,
+    required: [true, "please provide last name"],
+  },
+  email: {
+    type: String,
+    required: [true, "please provide email"],
+  },
+  password: {
+    type: String,
+    required: [true, "please provide password"],
+    minlength: 6,
+    select: false,
+  },
+  address: {
+    type: String,
+    required: [true, "please address"],
+  },
+  role: {
+    type: String,
+    enum: ["admin", "provider", "agent"],
+    required: [true, "please provide user role"],
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
-const tap = mongoose.model('tap', tapSchema)
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    const hash = await bcrypt.hash(this.password, 10);
+    this.password = hash;
+  }
+  next();
+});
+userSchema.methods.getSignedJWTToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
+};
 
-module.exports = tap
+userSchema.methods.matchPassword = async function(enteredPassword){
+    return await bcrypt.compare(enteredPassword, this.password)
+  }
+
+const user = mongoose.model("user", userSchema);
+
+module.exports = user;

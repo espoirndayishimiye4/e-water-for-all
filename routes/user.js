@@ -19,8 +19,8 @@ routes
   .patch(updateUser);
 routes
   .route("/")
-  .get( getAllUser)
-  .post( createUser);
+  .get(protected, getAllUser)
+  .post( protected,authorize('admin'), createUser);
 
 routes.route("/login").post(login);
 routes.route("/user/logout").get(logout);
