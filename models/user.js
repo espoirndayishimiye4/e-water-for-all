@@ -18,6 +18,6 @@ const tapSchema = new Schema({
     }
 })
 
-const tap = mongoose.model('tap', tapSchema)
+const user = mongoose.model('User', tapSchema)
 
-module.exports = tap
+module.exports = user

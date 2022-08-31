@@ -13,6 +13,7 @@ app.get("/", (req, res) => {
 });
 
 app.use('/user', require('./routes/user'))
+app.use('/tap', require('./routes/tap'))
 
 mongoose.connection.once('open', ()=>{
   console.log('DB connected')
