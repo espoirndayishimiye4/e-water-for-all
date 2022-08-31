@@ -19,7 +19,7 @@ routes
   .patch(updateUser);
 routes
   .route("/")
-  .get( getAllUser)
+  .get(protected, getAllUser)
   .post( createUser);
 
 routes.route("/login").post(login);

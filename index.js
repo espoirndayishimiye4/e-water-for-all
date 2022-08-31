@@ -1,16 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require('cookie-parser')
 require("dotenv").config();
 
 const dbConnect = require("./config/dbConnect");
 const app = express();
 
 app.use(express.json())
+app.use(cookieParser())
 
 dbConnect();
-app.get("/", (req, res) => {
-  res.send('e-water-for-all')
-});
 
 app.use('/user', require('./routes/user'))
 

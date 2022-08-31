@@ -11,18 +11,20 @@ const getAllUser = asyncHandler(async (req, res, next) => {
   });
 });
 const createUser = asyncHandler(async (req, res, next) => {
-  const { firstName, lastName, email, password, address } = req.body;
+  const { firstName, lastName, email, password, address, role } = req.body;
   const user = await User.create({
     firstName,
     lastName,
     email,
     password,
     address,
+    role
   });
   //sendTokenResponse(user, 200, req, res);
+  const token = user.getSignedJWTToken();
   res.status(201).json({
     success: true,
-    data: user
+    token
   })
 });
 
@@ -109,7 +111,6 @@ const sendTokenResponse = (user, statusCode, req, res) => {
       success: true,
       token
     });
-    console.log(req.cookie)
 };
 module.exports = {
   getAllUser,
