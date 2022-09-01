@@ -20,7 +20,7 @@ routes
 routes
   .route("/")
   .get(protected, getAllUser)
-  .post( createUser);
+  .post( protected,authorize('admin'), createUser);
 
 routes.route("/login").post(login);
 routes.route("/user/logout").get(logout);
