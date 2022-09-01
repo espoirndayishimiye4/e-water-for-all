@@ -8,11 +8,12 @@ const {
 	getOneMessage,
 	deleteOneMessage,
 } = require('../controllers/message');
+const { protected } = require("../middlewares/auth");
 
 const routes = express.Router();
 
-routes.route('/:_id').get(getOneMessage).delete(deleteOneMessage).patch(updateMessage);
-routes.route('/').get(getAllMessage).post(createMessage);
+routes.route('/:_id').get(protected, getOneMessage).delete(protected,deleteOneMessage).patch(protected,updateMessage);
+routes.route('/').get(protected,getAllMessage).post(protected,createMessage);
 
 
 module.exports = routes;
