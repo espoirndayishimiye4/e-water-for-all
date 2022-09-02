@@ -8,9 +8,7 @@ const app = express();
 app.use(express.json())
 
 dbConnect();
-app.get("/", (req, res) => {
-  res.send('e-water-for-all')
-});
+
 
 app.use('/user', require('./routes/user'))
 
