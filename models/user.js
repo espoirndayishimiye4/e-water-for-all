@@ -3,13 +3,13 @@ const bcrypt = require('bcrypt')
 const { Schema, default: mongoose } = require("mongoose");
 
 const userSchema = new Schema({
-  firstName: {
+  name: {
     type: String,
     required: [true, "please provide first name"],
   },
-  lastName: {
+  address: {
     type: String,
-    required: [true, "please provide last name"],
+    required: [true, "please address"],
   },
   email: {
     type: String,
@@ -21,14 +21,11 @@ const userSchema = new Schema({
     minlength: 6,
     select: false,
   },
-  address: {
-    type: String,
-    required: [true, "please address"],
-  },
   role: {
     type: String,
+    default: 'agent',
     enum: ["admin", "provider", "agent"],
-    required: [true, "please provide user role"],
+    
   },
   createdAt: {
     type: Date,

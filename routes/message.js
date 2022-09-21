@@ -13,7 +13,7 @@ const { protected } = require("../middlewares/auth");
 const routes = express.Router();
 
 routes.route('/:_id').get(protected, getOneMessage).delete(protected,deleteOneMessage).patch(protected,updateMessage);
-routes.route('/').get(protected,getAllMessage).post(protected,createMessage);
+routes.route('/').get(protected,getAllMessage).post(createMessage);
 
 
 module.exports = routes;
