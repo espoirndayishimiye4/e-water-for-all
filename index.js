@@ -2,12 +2,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser')
+const cors = require("cors");
 require("dotenv").config();
 
 const dbConnect = require('./config/dbConnect');
 const errorHandler = require('./middlewares/error')
 const app = express();
 
+app.use(cors());
 app.use(express.json())
 app.use(cookieParser())
 

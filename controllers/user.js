@@ -11,13 +11,12 @@ const getAllUser = asyncHandler(async (req, res, next) => {
   });
 });
 const createUser = asyncHandler(async (req, res, next) => {
-  const { firstName, lastName, email, password, address, role } = req.body;
+  const { name, address, email, password, role } = req.body;
   const user = await User.create({
-    firstName,
-    lastName,
+    name,
+    address,
     email,
     password,
-    address,
     role
   });
   //sendTokenResponse(user, 200, req, res);
